@@ -28,6 +28,7 @@ public class SimpleHashtable {
         this.remove("Jones");
         printHashtable();
 
+
     }
 
     public void put (String key, Employee employee) {
@@ -76,7 +77,7 @@ public class SimpleHashtable {
         }
 
         Employee employee = hashtable[hashedKey].employee;
-//        hashtable[hashedKey] = null;
+        hashtable[hashedKey] = null;
 
         StoredEmployee[] oldHashtable = hashtable;
         hashtable = new StoredEmployee[oldHashtable.length];
