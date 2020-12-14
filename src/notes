@@ -1,0 +1,324 @@
+Unstable sort:
+    Will the duplicate values be in the correct order in the sorted array.
+    In an unstable sort the proper order is NOT preserved.
+
+Stable sort (Does matter when sorting an object):
+    Will the duplicate values be in the correct order in the sorted array.
+    In an stable sort the proper order is preserved.
+
+Selection Sort (Unstable):
+    On each traversal Selecting the largest index and removing it into the sorted partition.
+    In-Place algorithm: doesnt use extra memory.
+        as long as the extra memory doesnt depend on the number of items being sorted.
+    Quadratic Algorithm: O(n^2) time complexity
+        for each element we traverse n elements.
+
+Insertion Sort (Stable since we compare with <= newElement so we place it after a duplicate):
+    On each traversal comparing the newElement with the sorted partition index until it is less than.
+    In-place algorithm: doesnt use extra memory. NO need for temporary arrays.
+        as long as the extra memory doesnt depend on the number of items being sorted.
+    Quadratic Algorithm: O(n^2) time complexity
+        for each element we traverse n elements.
+
+Shell Sort (Unstable because of the gap):
+    Improvement of Insertion Sort, if the partition is partially sorted not as many shifts are needed.
+    Shell sort uses a larger gap (insertion sort uses 1) value, as the algorithm runs, the gap is reduced.
+    When the gap is 1, it then becomes insertion sort.
+    We compare indexes with the gap value, ie. index 0 and 3.
+
+    In-place algorithm: doesnt use extra memory. NO need for temporary arrays.
+        as long as the extra memory doesnt depend on the number of items being sorted.
+    Quadratic Algorithm: O(n^2) time complexity
+        for each element we traverse n elements.
+        It can perform much better than that.
+        Gap value determines the time complexity
+
+
+Sorting.Recursion:
+    the recursive call waits for n-1 until 0 (or whatever the constraint is).
+    Need a base case to break from recursion ot
+
+
+    otherwise it is infinite.
+    example: recursiveFactorial(3)
+             recursiveFactorial(2)
+             recursiveFactorial(1)
+             recursiveFactorial(1) // returns and gets popped from the call stack
+             recursiveFactorial(2) // then this
+             recursiveFactorial(3) // then this
+    tail recursion??
+
+
+Sorting.Mergesort (stable algorithm):
+    Divide and conquer and recursive
+    Two phases:
+        Splitting: preparation phase (we dont create new arrays, we use indices where the array has been split)
+            Divide the unsorted array into two arrays, which are unsorted.
+            The first array is the left and the second is right
+            keep splitting left and right until all the arrays have only one element each, these arrays are sorted.
+        Merging: sorting during merging phase
+            Merge every left/right pair of sibling arrays into a sorted array
+            After the first merge, there is a bunch of 2 element sorted arrays.
+            Then merge those sorted arrays to end up with a bunch of 4-element sorted arrays
+            repeat until you have a single sorted array.
+
+            Create a temporary array large enough to hold all the elements in the arrays we are merging.
+                Set i to the first index of the left array, and j to the first index of the right array.
+                Compare left[i] to right[j].
+                    if left is smaller, we copy it to the temp array and increment i by 1.
+                    if right is smaller, we copy it to the temp array and increment j by 1.
+                        continue until all elements in the two arrays have been processed
+                    the temporary array now holds the merged values in sorted order.
+                    copy temporary array back to original array at correct positions.
+    Start = 0, end = array length
+    midpoint= (start+end) / 2
+
+    Not In-place: Uses temporary arrays in the merging process
+    Time complexity: O(nlogn) - base2. we are repeatedly dividing the array in half during the splitting phase.
+
+Sorting.Quicksort (Unstable algorithm):
+    Divide and conquer and recursive
+    Uses a pivot element to partition the array into two halves
+        on the left it puts elements that are < elements
+        on the right it puts elements that are > elements.
+        pivot will be in the middle:
+            anything to left is less than
+            anything to right is greater than
+        Process is repeated for left and right array (update pivot)
+            eventually every element has been the pivot.
+
+    In-Place algorithm: does not use temporary arrays
+    Time complexity: O(nlogn) - to the base 2. we are repeatedly dividing the array in to 2 halves.
+        Worst case it is quadratic.
+        but in the average it runs O(nlogn)
+
+        The choice of the pivot can have an impact on the time complexity
+
+Sorting.CountingSort:
+    Counts the number of occurrences of each values
+    Values must be within specific range (cant be huge between 1-1 mill.)
+            Makes assumption about the data
+            Doesnt use comparisons
+    Only works with non-negative discrete values (cant work with floats, strings) WHOLE NUMBERS usually
+    Holds values according to its index so if we find multiple 1's we increment the index to value 2:
+        index[0] = 0
+        index[1] = 2 we have seen two 2's
+        ...
+    after we have counted, we write back to the original input array.
+    Not In-place algorithm: uses temporary array
+    Time complexity: O(n) can achieve this because we are making assumptions about the data we are sorting.
+
+    Also the input array elements should be within the range of the array size.
+        Would be dumb to have 1,2,1,4,4,6 and then 100. and create an array size of 100.
+        It performs best if the range of values are equal to the array size.
+    If we want the sort to be stable, we have to do some extra steps.
+
+Sorting.RadixSort (stable):
+    Makes assumptions about the data
+        Data (must be integers or strings) must have same radix and width.
+            Radix: number of unique digits or values that a numbering system or an alphabet has
+                Decimals: radix is 10 since decimal can go between 0-9
+                Binary: radix is 2 since the binary system only uses 0 or 1
+                Alphabets: radix is 26 since the alphabet has 26 characters
+            Width: equals the length of the value, 1000 = 4, hello = 5
+    Sort based on each individual digit or letter position. (uses counting sort)
+        first start with 1s, 10s then 100s ...
+            Start at the rightmost position and move to the left until we have done all.
+            KEY: Must use a stable sort algorithm at each stage
+        4525: 5 will be at position 1,
+    In-place algorithm: yes
+    Time complexity: O(n) even so often runs slower than O(nlogn) because of the overhead involved
+
+====================================================================================================
+
+Lists
+
+Abstract Data Types:
+    Doesnt dictate how the data is organized.
+        Array have to be specific size and predetermined, Lists doesnt.
+    Dictate the operations you can perform.
+
+    Concrete Data structure (in java, is usually a class) is usually a concrete class
+    Abstract Data type is usually an interface
+        Specifying behavior.
+
+ArrayList:
+    Good for random access. O(1)
+        if you have the index. (if you do not have its index its shit)
+    Not good for inserting items (unless it is at the end) or deletions O(n)
+        Elements have to be shifted around
+
+Vectors:
+    Thread safe ArrayList.
+        ArrayList is not Synchronized
+            NOT Possible to use with multiple threads. without ruining order when inserting deleting. (CONFLICTS)
+        Vector is Synchronized and thread safe
+            Possible to use with multiple threads. without ruining order when inserting deleting.
+
+    Synchronization, has a overhead involved (slows things down). That's why arraylist was added after vector.
+
+    Has the same methods as arraylist.
+
+Singly Linked Lists (only links 1 element):
+    Sequentially linked objects, each item in the list is called a node.
+        The first item in the list is the head.
+        The last item always points to null.
+        Each item knows the next node.
+    Insert: O(1)
+        Always insert at the head (front of the list)
+            1. Create a new node
+            2. Assign current head to the next field
+            3. assign head to new
+    Deletion: O(1)
+        Always delete at the head (front of the list)
+            1. Assign Node to a temporary variable "removedNode"
+            2. Assign "Head" to next in line
+            3. Return "removedNode"
+
+    Differ from array list:
+        As long as you are inserting and deleting from the front of the list the insertion/deletion is done in O(1) time.
+        No need to resize.
+        (pretty much a stack with FIFO)
+
+Doubly Linked Lists (links 2 nodes):
+    Each node in the list points to the next and previous items
+        The list has a head and a tail
+
+    Mainly focus around inserting/deleting at head or tail,
+    we will lose the advantage if we try to assign to the middle.
+
+    Insert: O(1)
+        You can insert at the tail or the head of list
+            But if you want to insert in the middle, you will have to traverse: Worst case O(n)
+        Insert at head: O(1)
+            1. Create new node "bill"
+            2. Assign "Jane" to bill's next field
+            3. Assign whatever jane is pointing to as previous to bill's previous field
+            4. Assign "Bill" to jane's previous field
+            5. assign head to "Bill"
+        Insert at tail: O(1)
+            1. Create new node "bill"
+            2. Assign tail's next field to bill's next field
+            3. Assign tail to bill's previous field
+            4. Assign tail's next field to "bill"
+            5. assign tail to "Bill"
+
+            To insert a node A between nodes B and C
+                1. Assign A's next field to B's next field
+                2. Assign A's previous field to c's field
+                3. assign B's next field to A
+                4. Assign C's previous field to A
+                O(1) time complexity, but we have to find the insertion point first, so this is actually O(n)
+
+        Deletion at head: O(1)
+            1. Assign "jane" to "removedNode"
+            2. Assign john's previous field to jane's previous field
+            3. assign head to jane's next field
+            4. return "removedNode" from the method
+        Deletion at tail: O(1)
+            1. Assign "Bill" to "removedNode"
+            2. Assign mikes's next field to bills's next field
+            3. Assign tail to Bill's previous field
+            4. Return "removedNode" from the method
+
+            To remove a node A from between B and C
+                1. Assign A to "removedNode"
+                2. Assing C's previous field to A's previous field
+                3. Assign B's next field to A's next field
+                4. return A from the method
+                O(1) time complexity, but we have to find A first, so this is actually O(n)
+
+====================================================================================================
+
+Stacks (look at it with a stack of papers/cards in your hand):
+    Call stack in a computer
+    Abstract data type, doesnt care about the order of the items, but these are the operations:
+        LIFO: - Last in, first out
+        push: adds an item as the top item on the stack
+        pop: removes the top item on the stack
+        peek: gets the top item on the stack without popping it
+    Stacks can be backed by any data structures
+        ideal backing data structure: linked list
+
+    Time Complexity:
+        Can vary depending on which datastructure you are using
+            Linked List (IDEAL):
+                O(1) for push, pop, and peek, when using a linked list
+            Array:
+                O(n) because array may have to be resized
+                if you know the max number of items that will ever be on the stack, Array can be a good choice.
+                    if memory is tight, an array might be a good choice
+
+Queues (Like lineups when waiting in lines first in first out)
+    Abstract data type, doesnt care about the order of the items, operations:
+        FIFO: First in, first out
+        ADD(enqueue): add an item to the end of the queue
+        Remove(dequeue): remove the item at the front of the queue
+            (JDK has poll() instead, difference is, if queue isEmpty returns null instead of exception)
+        peek: get the item at the front of the queue, but dont remove it.
+
+        JDK 1.5+:
+         Returns Expection:
+            add, remove, element
+         Returns special value:
+            offer, poll, peek
+
+    Time Complexity:
+        Can vary depending on which datastructure you are using
+            Linked List (IDEAL):
+                O(1) for push, pop, and peek, when using a linked list
+            Array:
+                O(n) because array may have to be resized
+                if you know the max number of items that will ever be on the stack, Array can be a good choice.
+                    if memory is tight, an array might be a good choice
+
+
+Hash Tables: (Also known as dictionaries, maps, lookup tables, associative arrays)
+    Abstract data type, doesnt care about the order of the items,
+    Provides access to data through KEYS (Key value pairs)
+        Access requires key for its value.
+            KEY: doesnt have to be an INTEGER (Whatever you want)
+            Also KEY and the VALUE pair dont have to match
+    Optimized for retrieval (When you know the key)
+
+    Hashing:
+        Keys are converted to integer (Hashing)
+        Hash function maps keys to int
+        In java, hash fonctions is Object.hashCode()
+            Collision: occurs when more than one value has the same hashed value
+                IF we hash the same last name of an employee (not the same person)
+                    they would have the same result and cause a collision
+
+    Load Factor:
+        Tells us how full a hash table is
+        Load factor = # of items / capacity = size / capacity
+            Used to decide when to resize the array backing the hash table
+        Its a balancing act:
+            we do not want load factor too low (lots of empty space)
+            we dont want load factor too high (will increase likelihood of collisions)
+        Can play a role in determining the time complexity for retrieval
+
+    Add to a Hash Table backed by an array
+        1. Provide key/value pair
+        2. Use a hash function to has the key to an int value
+        3. Store the value at the hashed key value - this is the index into the array
+
+    Retrieve a value from a hash table
+        1. Provide key
+        2. Use the same hash function to hash the key to an int value
+        3. Retrieve the value stored at the hashed key value
+
+    Handling Collisions 2 kinds:
+        Open Addressing: if a collision happens, then we look for another open position in the array
+            Linear Probing: Linear fashion
+                If already occupied we increment the hashed value with +1, keep doing it until we find an empty slot or if full.
+                    Each increment is called a PROBE
+            No longer constant time, worst case is now O(n), have to loop through entire array
+
+    Time Complexity:
+        Retrieval: O(1) - Constant Time
+
+
+
+
+
