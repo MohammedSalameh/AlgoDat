@@ -315,8 +315,18 @@ Hash Tables: (Also known as dictionaries, maps, lookup tables, associative array
                     Each increment is called a PROBE
             No longer constant time, worst case is now O(n), have to loop through entire array
 
-    Time Complexity:
-        Retrieval: O(1) - Constant Time
+        Chaining: instead of storing the value directly in the array, each index holds a linked list.
+            Draw back: when retrieving or deleting, we have to traverse the linked list.
+            If we had a bad hashing function, every single key hashed to the same value, every single item is being put at the same spot.
+            Worst case O(n).
+
+            In the average scenario:
+                let k be the length of the linked list
+                    then retrieval will be O(1+k)
+
+            most important thing is the HASHING FUNCTION & THE LOAD FACTOR!
+
+
 
 
 

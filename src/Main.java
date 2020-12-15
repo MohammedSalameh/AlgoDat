@@ -1,3 +1,4 @@
+import Hashtable.ChainingHashtable;
 import Hashtable.SimpleHashtable;
 import Lists.ArrayList;
 import Lists.DoublyLinkedList;
@@ -44,8 +45,9 @@ public class Main {
 //        new LinkedStack();
 //        new ArrayQueue(5);
 
-        new SimpleHashtable();
+//        new SimpleHashtable();
 
+        new ChainingHashtable();
     }
 
 
