@@ -3,9 +3,17 @@ package Hashtable;
 import Models.Employee;
 import Models.StoredEmployee;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 public class SimpleHashtable {
 
     private StoredEmployee[] hashtable;
+
+    // challenge
+    int[] nums = new int[10];
+    int[] numsToAdd = {59382, 43, 6894, 500, 99, -58};
 
     public SimpleHashtable() {
         this.hashtable = new StoredEmployee[10];
@@ -20,16 +28,67 @@ public class SimpleHashtable {
         this.put("Doe", johnDoe);
         this.put("Wilson", mikeWilson);
         this.put("Smith", marrySmith); // collision
-        printHashtable();
+//        printHashtable();
 
         System.out.println("Retrieve key Smith:" + get("Smith"));
 
         this.remove("Wilson");
         this.remove("Jones");
-        printHashtable();
+//        printHashtable();
+
+
+//        challenge1();
+        challenge2();
+    }
+
+    // <editor-fold desc="Challenges"
+    public void challenge1() {
+        for (int i = 0; i < numsToAdd.length; i++){
+            nums[hash(numsToAdd[i])] = numsToAdd[i];
+        }
+        for (int i = 0; i < nums.length; i++) {
+            System.out.println(nums[i]);
+        }
+    }
+
+    public void challenge2() {
+        /** Remove duplicate items from a linked list
+            solution must use the JDK linkedlist
+            Your solution must use a Hashmap
+            You can assume that employees with the same last name (key) are duplicates,
+         **/
+        LinkedList<Employee> employees = new LinkedList<>();
+        employees.add(new Employee("Jane", "Jones", 123));
+        employees.add(new Employee("John", "Doe", 5678));
+        employees.add(new Employee("Mike", "Wilson", 45));
+        employees.add(new Employee("Mary", "Smith", 5555));
+        employees.add(new Employee("John", "Doe", 5678));
+        employees.add(new Employee("Bill", "End", 3948));
+        employees.add(new Employee("Jane", "Jones", 123));
+
+
+        Map<String, Employee> hashMap = new HashMap<>();
+
+        Employee current = null;
+        for (int i = 0; i < employees.size(); i++) {
+            current = employees.get(i);
+            if (hashMap.containsKey(current.getLastName())) {
+                employees.remove(i);
+            } else {
+                hashMap.put(current.getLastName(), current);
+            }
+        }
+
+        employees.forEach(employee -> System.out.println(employee));
+
 
 
     }
+
+    private int hash(int value) {
+        return Math.abs(value % nums.length);
+    }
+    //</editor-fold>
 
     public void put (String key, Employee employee) {
         int hashedKey = hashKey(key);
