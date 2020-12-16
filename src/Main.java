@@ -6,6 +6,7 @@ import Lists.IntegerLinkedList;
 import Lists.SinglyLinkedList;
 import Models.Employee;
 import Queues.ArrayQueue;
+import Sorting.BucketSort;
 import Stacks.ArrayStack;
 import Stacks.LinkedStack;
 
@@ -47,8 +48,11 @@ public class Main {
 
 //        new SimpleHashtable();
 
-        new ChainingHashtable();
+//        new ChainingHashtable();
+        new BucketSort();
     }
+
+
 
 
     static class ListNode {

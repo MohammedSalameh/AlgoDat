@@ -129,6 +129,32 @@ Sorting.RadixSort (stable):
     In-place algorithm: yes
     Time complexity: O(n) even so often runs slower than O(nlogn) because of the overhead involved
 
+
+Sorting.BucketSort ():
+    Uses hashing (the values we are sorting) and makes assumption about the data, like radix and counting sort.
+        Because we make assumptions, it can sort in Linear time, O(n), time
+            performs best when hashed values of items being sorted are evenly distributed, so there arent many collisions
+
+    Generalization of counting sort:
+        1. Distribute items into buckets based on their hashed values (Scattering phase)
+        2. Sort the items in each bucket
+        3. Merge the buckets - can just concatenate them (gathering phase)
+            Copy back to original array
+
+    The values in bucket X must be greater than the values in bucket x-1 and less than the values in bucket x+1
+        So in the gathering phase we simply copy to original array from bucket 0 to bucket x.
+            The hash function used, must meet this requirement.
+        Buckets are split by their tens position
+
+    In-place algorithm: no (uses extra memory depending on the items in the array)
+    Stability: depends on sort algorithm used to sort the buckets - ideally, you want a stable sort
+    To achieve O(n), must have only one item per bucket.
+        Insertion sort is often used to sort the buckets, because it is fast when the number of items is small.
+
+
+
+
+
 ====================================================================================================
 
 Lists
@@ -325,6 +351,10 @@ Hash Tables: (Also known as dictionaries, maps, lookup tables, associative array
                     then retrieval will be O(1+k)
 
             most important thing is the HASHING FUNCTION & THE LOAD FACTOR!
+
+    Hashtable: doesnt allow null keys or values (Synchronized)
+    HashMap: allows null keys or values ()
+    LinkedHashMap can be used as a cache with recently used items and removal of eldest items.
 
 
 
