@@ -3,8 +3,7 @@ package Hashtable;
 import Models.Employee;
 import Models.StoredEmployee;
 
-import java.util.LinkedList;
-import java.util.ListIterator;
+import java.util.*;
 
 public class ChainingHashtable {
 
@@ -16,23 +15,61 @@ public class ChainingHashtable {
             hashtable[i] = new LinkedList<StoredEmployee>();
         }
 
-        Employee janeJones = new Employee("Jane", "Jones", 21);
-        Employee johnDoe = new Employee("John", "Doe", 34);
-        Employee marrySmith = new Employee("Marry", "Smith", 365);
-        Employee mikeWilson = new Employee("Mike", "Wilson", 325);
-
-        this.put("Jones", janeJones);
-        this.put("Doe", johnDoe);
-        this.put("Wilson", mikeWilson);
-        this.put("Smith", marrySmith); // collision
-
-        printHashtable();
+//        Employee janeJones = new Employee("Jane", "Jones", 21);
+//        Employee johnDoe = new Employee("John", "Doe", 34);
+//        Employee marrySmith = new Employee("Marry", "Smith", 365);
+//        Employee mikeWilson = new Employee("Mike", "Wilson", 325);
+//
+//        this.put("Jones", janeJones);
+//        this.put("Doe", johnDoe);
+//        this.put("Wilson", mikeWilson);
+//        this.put("Smith", marrySmith); // collision
+//
+//        printHashtable();
 
 //        System.out.println("Retrieve key Smith:" + get("Smith"));
 //        this.remove("Wilson");
 //        this.remove("Jones");
 //        printHashtable();
 //        System.out.println("Retrieve key Smith:" + get("Smith"));
+
+        JDKHashtable();
+
+    }
+
+    public void JDKHashtable() {
+        // Hashmap based on Map interface
+        Employee janeJones = new Employee("Jane", "Jones", 21);
+        Employee johnDoe = new Employee("John", "Doe", 34);
+        Employee marrySmith = new Employee("Marry", "Smith", 365);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 325);
+
+        Map<String, Employee> hashmap = new HashMap<String, Employee>();
+        hashmap.put("Jones", janeJones);
+        hashmap.put("Doe", johnDoe);
+        hashmap.put("Wilson", mikeWilson);
+        hashmap.put("Smith", marrySmith);
+
+        //Printing
+//        Iterator<Employee> iterator = hashmap.values().iterator();
+//        while (iterator.hasNext()) {
+//            System.out.println(iterator.next());
+//        }
+
+//        Employee employee = hashmap.put("Doe", mikeWilson); // returns replaced employee cause its the same key
+        // otherwise use putifabsent, if the key is not used insert, else return current key object/employee
+        Employee employee = hashmap.putIfAbsent("Doe", mikeWilson);
+        System.out.println(employee);
+
+        System.out.println(hashmap.get("someone")); // returns null if no one found
+        System.out.println(hashmap.getOrDefault("someone", mikeWilson)); // if no one found, return mikeWilson
+        System.out.println(hashmap.remove("Jones"));
+
+        hashmap.forEach((k, v) -> System.out.println("Key = " + k + " Employee = " + v));
+
+//        System.out.println(hashmap.containsKey("Doe"));
+//        System.out.println(hashmap.containsValue(janeJones));
+
 
     }
 

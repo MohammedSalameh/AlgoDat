@@ -326,6 +326,10 @@ Hash Tables: (Also known as dictionaries, maps, lookup tables, associative array
 
             most important thing is the HASHING FUNCTION & THE LOAD FACTOR!
 
+    Hashtable: doesnt allow null keys or values (Synchronized)
+    HashMap: allows null keys or values ()
+    LinkedHashMap can be used as a cache with recently used items and removal of eldest items.
+
 
 
 
