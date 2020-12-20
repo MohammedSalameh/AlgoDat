@@ -6,6 +6,7 @@ import Lists.IntegerLinkedList;
 import Lists.SinglyLinkedList;
 import Models.Employee;
 import Queues.ArrayQueue;
+import Searching.SearchAlgorithms;
 import Sorting.BucketSort;
 import Stacks.ArrayStack;
 import Stacks.LinkedStack;
@@ -46,10 +47,20 @@ public class Main {
 //        new LinkedStack();
 //        new ArrayQueue(5);
 
-        new SimpleHashtable();
+//        new SimpleHashtable();
 
 //        new ChainingHashtable();
 //        new BucketSort();
+
+//        System.out.println(new SearchAlgorithms().iterativeBinarySearch(55));
+//        System.out.println(new SearchAlgorithms().iterativeBinarySearch(-15));
+//        System.out.println(new SearchAlgorithms().iterativeBinarySearch(20));
+//        System.out.println(new SearchAlgorithms().iterativeBinarySearch(12));
+
+        System.out.println(new SearchAlgorithms().recursiveBinarySearch(55));
+        System.out.println(new SearchAlgorithms().recursiveBinarySearch(-15));
+        System.out.println(new SearchAlgorithms().recursiveBinarySearch(20));
+        System.out.println(new SearchAlgorithms().recursiveBinarySearch(12));
 
     }
 

@@ -153,6 +153,46 @@ Sorting.BucketSort ():
 
 
 
+====================================================================================================
+Search Algorithms:
+    Look for a value in a data structure.
+
+Linear Search Algorithm:
+    Basically just a for loop with a pointer (i) and increment until you find the value or hit the end of array.
+    Time complexity: O(n)
+
+Binary Search Algorithm
+    Data must be sorted!
+    Chooses the element in the middle of the array and compares it against the search value
+        if element is equal (==) to the value , we are done
+        if element is greater (>) than the value, search the left half of the array
+        if the element is less (<) than the value, search the right half of the array
+            keep repeating this, by partitioning in half, each time until you have a 1 value partition.
+
+        [-22, -15, 1, 7, 20, 35, 55]
+        search value: 1
+        Step 1:
+            start = 0
+            end = 7
+            midpoint = (start+end)/2 = 3
+            array[3] = 7 - this is greater than 1, so we will look at the left half of the array
+        Step 2:
+            start = 0
+            end = midpoint = 3
+            midpoint = (start+end)/2 = 1
+            array[1] = -15 - this is less than 1, so we will look at the right half of the array
+        Step 3:
+            start = midpoint + 1 = 2
+            end = 3
+            midpoint = (start+end)/2 = 2
+            array[2] = 1 - we have found the value.
+
+        At some point, there will be only one element in the partition you are checking, but it does not have to get to that point.
+        Can be implemented recursively
+        Time complexity: O(logn) - keeps dividing in half
+
+
+
 
 
 ====================================================================================================

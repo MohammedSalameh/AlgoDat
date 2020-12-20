@@ -3,9 +3,7 @@ package Hashtable;
 import Models.Employee;
 import Models.StoredEmployee;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 public class SimpleHashtable {
 
@@ -68,7 +66,7 @@ public class SimpleHashtable {
 
 
         Map<String, Employee> hashMap = new HashMap<>();
-
+        long start = System.nanoTime();
         Employee current = null;
         for (int i = 0; i < employees.size(); i++) {
             current = employees.get(i);
@@ -79,8 +77,45 @@ public class SimpleHashtable {
             }
         }
 
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
         employees.forEach(employee -> System.out.println(employee));
+        System.out.println("time elapsed: " + timeElapsed);
 
+    }
+
+    private void solution() {
+        LinkedList<Employee> employees = new LinkedList<>();
+        employees.add(new Employee("Jane", "Jones", 123));
+        employees.add(new Employee("John", "Doe", 5678));
+        employees.add(new Employee("Mike", "Wilson", 45));
+        employees.add(new Employee("Mary", "Smith", 5555));
+        employees.add(new Employee("John", "Doe", 5678));
+        employees.add(new Employee("Bill", "End", 3948));
+        employees.add(new Employee("Jane", "Jones", 123));
+
+        HashMap<Integer, Employee> employeeTable = new HashMap<>();
+        long start = System.nanoTime();
+
+        ListIterator<Employee> iterator = employees.listIterator();
+        List<Employee> remove = new ArrayList<>();
+
+        while (iterator.hasNext()) {
+            Employee employee = iterator.next();
+            if (employeeTable.containsKey(employee.getId())) {
+                remove.add(employee);
+            }
+            else {
+                employeeTable.put(employee.getId(), employee);
+            }
+        }
+
+        for (Employee employee: remove) {
+            employees.remove(employee);
+        }
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
+        System.out.println("time elapsed: " + timeElapsed);
 
 
     }
