@@ -396,6 +396,41 @@ Hash Tables: (Also known as dictionaries, maps, lookup tables, associative array
     HashMap: allows null keys or values ()
     LinkedHashMap can be used as a cache with recently used items and removal of eldest items.
 
+Trees:
+    Abstract data structure (but it is a gray area) does have influence in the ordering of items.
+    Hierarchical data structure based on nodes:
+        Root node: the node at the top of the tree. does not have a parent, only 1 root per tree.
+            Singleton tree: if you have a tree that only has one node, the root.
+        Each node: every non-root node has one and only one parent
+        Leaf node: has no children
+        Each tree consists of one or more subtrees: can start from any given node.
+
+        The Path: is the sequence of nodes required to go from one node to another.
+            CANNOT HAVE CYCLIC PATHS.
+        Root Path: is the path going in the other direction.
+            How to go from a node to the root.
+
+        Depth of a node: is the number of edges from the node to the root.
+            The root will always have a depth of 0.
+        Height of a tree: is the number of edges from the root to a leaf.
+            Height of a node: is the number of edges on the longest path, from a node to a leaf.
+                Leaf nodes have a height of 0.
+
+        Levels: nodes on the same level.
+            Root is 0 (Depth of 0)
+                Children (Depth of 1)
+                    Grand-children (Depth 2)
+                        Great-Grand-Children (Depth 3)
+        Ancestors: are the path from the root to the node. root-children-grand-children
+
+
+    When you have items that can have hierarchical relationships, such that items can descend from other items.
+        in that case, Trees are a good data structure.
+            The java class (Object class is root) hierarchy is a tree, one class can only extend 1 parent.
+            but you can have multiple classes extending the same parent.
+
+            The file system (explorer) is a tree.
+                Each drive is a tree.
 
 
 
